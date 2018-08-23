@@ -17,6 +17,7 @@ Item {
     property int gridSizeStyle: 0; // #0 - adaptive grid, #1 - fixed grid // used when in gridView
 
     property int itemViewStyle: 0; // #0 - listView; #1 - gridView
+    property int alternateColorForRow: 0; // #0 - No; #1 - Yes
 
 
     property int currentPageNum: 0;
@@ -108,6 +109,7 @@ Item {
         settings["maxGridPerRow"] = objMetaDbModel.maxGridPerRow;
         settings["gridSizeStyle"] = objMetaDbModel.gridSizeStyle;
         settings["itemViewStyle"] = objMetaDbModel.itemViewStyle;
+        settings["alternateColorForRow"] = objMetaDbModel.alternateColorForRow;
         objKVS.forcedSet("metaDbSettings", JSON.stringify(settings));
     }
 
@@ -121,6 +123,7 @@ Item {
             objMetaDbModel.maxGridPerRow = settings["maxGridPerRow"];
             objMetaDbModel.gridSizeStyle = settings["gridSizeStyle"];
             objMetaDbModel.itemViewStyle = settings["itemViewStyle"];
+            objMetaDbModel.alternateColorForRow = settings["alternateColorForRow"];
         }
         catch(e){
         }
