@@ -45,13 +45,11 @@ QbSql{
                     "UPDATE MetaStore SET utimestamp=(strftime('%s', 'now')), title=:title, tags=:tags, author=:author WHERE mid=:mid",
                     [
                         {"name":":mid","data":mid,"type":"integer"},
-                        //{"name":":utimestamp","data":1,"type":"integer"},
                         {"name":":title","data":title,"type":"string"},
                         {"name":":tags","data":tags,"type":"string"},
                         {"name":":author","data":author,"type":"string"}
                     ]
                     );
-        console.log(JSON.stringify(vmap));
         var isOK = false;
         try{
             if(vmap["status"] === "OK"){
@@ -65,8 +63,11 @@ QbSql{
 
     function remove(mid){
         var vmap = objMetaStore.preparedQuery(
-                    "DELETE FROM MetaStore WHERE mid=:mid)",
-                    [[":mid",mid]]);
+                    "DELETE FROM MetaStore WHERE mid=:mid",
+                    [
+                        {"name":":mid","data":mid,"type":"integer"}
+                    ]
+                    );
         var isOK = false;
         try{
             if(vmap["status"] === "OK"){
