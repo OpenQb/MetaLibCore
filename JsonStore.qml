@@ -62,6 +62,25 @@ QbSql{
         return {};
     }
 
+    function getByMID(mid){
+        var vmap = objJsonStore.preparedQuery(
+                    "SELECT * FROM JsonStore WHERE mid=:mid",
+                    [
+                        {"name":":mid","data":mid,"type":"integer"}
+                    ]
+                    );
+        try{
+            if(vmap["status"] === "OK"){
+                if(vmap["data"][0] === undefined) return {};
+                return vmap["data"][0];
+            }
+        }
+        catch(e){
+        }
+
+        return {};
+    }
+
     function update(jid,mid,json){
         var vmap = objJsonStore.preparedQuery(
                     "UPDATE JsonStore SET utimestamp=(strftime('%s', 'now')), mid=:mid, json=:json WHERE jid=:jid",
