@@ -1,4 +1,9 @@
 module MetaLibCore
 
 
+MetaDbModel                 1.0 MetaDbModel.qml
+
+MetaStore                   1.0 MetaStore.qml
+DataStore                   1.0 DataStore.qml
+JsonStore                   1.0 JsonStore.qml
 KeyValueStore               1.0 KeyValueStore.qml
