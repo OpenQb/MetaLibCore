@@ -25,5 +25,51 @@ QbSql{
     }
 
 
+    function add(title,tags,author){
+        var vmap = objMetaStore.preparedQuery(
+                    "INSERT INTO MetaStore(title,tags,author) VALUES(:title,:tags,:author)",
+                    [[":title",title],[":tags",tags],[":author",author]]);
+        var isOK = false;
+        try{
+            if(vmap["status"] === "OK"){
+                isOK = true;
+            }
+        }
+        catch(e){
+        }
+        return isOK;
+    }
+
+    function update(mid,title,tags,author){
+        var vmap = objMetaStore.preparedQuery(
+                    "UPDATE MetaStore SET udate=strftime('%s', 'now'),title=:title,tags=:tags,author=:author WHERE mid=:mid)",
+                    [[":title",title],[":tags",tags],[":author",author],[":mid",mid]]);
+        var isOK = false;
+        try{
+            if(vmap["status"] === "OK"){
+                isOK = true;
+            }
+        }
+        catch(e){
+        }
+        return isOK;
+    }
+
+    function remove(mid){
+        var vmap = objMetaStore.preparedQuery(
+                    "DELETE FROM MetaStore WHERE mid=:mid)",
+                    [[":mid",mid]]);
+        var isOK = false;
+        try{
+            if(vmap["status"] === "OK"){
+                isOK = true;
+            }
+        }
+        catch(e){
+        }
+        return isOK;
+    }
+
+
 
 }
