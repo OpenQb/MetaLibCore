@@ -49,6 +49,7 @@ QbSql{
                     );
         try{
             if(vmap["status"] === "OK"){
+                if(vmap["data"][0] === undefined) return {};
                 return vmap["data"][0];
             }
         }
