@@ -42,6 +42,11 @@ Item {
         id: objKVS
     }
 
+    Component.onDestruction: {
+        objMetaDbModel.close();
+    }
+
+    // ## All Important Methods ## //
     function setup(){
         objMetaDbModel.isReady = false;
 
@@ -80,7 +85,47 @@ Item {
         objMetaDbModel.isReady = true;
     }
 
-    // ## All Important Methods ## //
+    function open(){
+        setup();
+        if(objMetaDbModel.isReady) restoreSettings();
+    }
+
+    function close(){
+        if(objMetaDbModel.isReady) saveSettings();
+    }
+
+    function createDb(){
+        setup();
+        if(objMetaDbModel.isReady) saveSettings();
+    }
+
+    function saveSettings(){
+        var settings = {};
+        settings["itemPerPage"] = objMetaDbModel.itemPerPage;
+        settings["itemHeight"] = objMetaDbModel.itemHeight;
+        settings["thumbnailWidth"] = objMetaDbModel.thumbnailWidth;
+        settings["thumbnailHeight"] = objMetaDbModel.thumbnailHeight;
+        settings["maxGridPerRow"] = objMetaDbModel.maxGridPerRow;
+        settings["gridSizeStyle"] = objMetaDbModel.gridSizeStyle;
+        settings["itemViewStyle"] = objMetaDbModel.itemViewStyle;
+        objKVS.forcedSet("metaDbSettings", JSON.stringify(settings));
+    }
+
+    function restoreSettings(){
+        var settings = objKVS.get("metaDbSettings",{});
+        try{
+            objMetaDbModel.itemPerPage = settings["itemPerPage"];
+            objMetaDbModel.itemHeight = settings["itemHeight"];
+            objMetaDbModel.thumbnailWidth = settings["thumbnailWidth"];
+            objMetaDbModel.thumbnailHeight = settings["thumbnailHeight"];
+            objMetaDbModel.maxGridPerRow = settings["maxGridPerRow"];
+            objMetaDbModel.gridSizeStyle = settings["gridSizeStyle"];
+            objMetaDbModel.itemViewStyle = settings["itemViewStyle"];
+        }
+        catch(e){
+        }
+    }
+
     function reload(){
     }
 
