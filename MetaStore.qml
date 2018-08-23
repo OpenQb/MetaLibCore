@@ -41,7 +41,7 @@ QbSql{
     }
 
     function update(mid,title,tags,author){
-        var vmap = objMetaStore.preparedQuery("UPDATE MetaStore SET utimestamp=(strftime('%s', 'now')), title=:title, tags=:tags, author=:author WHERE mid=:mid",
+        var vmap = objMetaStore.preparedQuery("UPDATE MetaStore SET title=:title, tags=:tags, author=:author WHERE mid=:mid",
                     [[":mid",mid],[":title",title],[":tags",tags],[":author",author]]);
         console.log(JSON.stringify(vmap));
         var isOK = false;
