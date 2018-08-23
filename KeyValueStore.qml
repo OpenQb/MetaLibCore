@@ -34,6 +34,20 @@ QbSql {
     }
 
     function get(key,value){
+        if(value === undefined || value === null) value = "";
+        var vmap = objKeyValueStore.preparedQuery("SELECT * FROM KeyValueStore WHERE key=:key",[[":key",key]]);
+        var dval = "";
+        var isFound = false;
+        try{
+            if(vmap["status"] === "OK"){
+                dval = vmap["data"][0]["value"];
+            }
+        }
+        catch(e){
+        }
+
+        if(dval === "") return value;
+        else return dval;
     }
 
     function isKeyExists(key){
