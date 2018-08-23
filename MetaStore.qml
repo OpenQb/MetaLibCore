@@ -98,6 +98,23 @@ QbSql{
         return isOK;
     }
 
+    function isExists(mid){
+        var vmap = objMetaStore.preparedQuery(
+                    "SELECT COUNT(*) FROM MetaStore WHERE mid=:mid",
+                    [
+                        {"name":":mid","data":mid,"type":"integer"}
+                    ]
+                    );
+        var isFound = false;
+        try{
+            if(vmap["status"] === "OK"){
+                if(vmap["data"][0]["COUNT(*)"] === 1) isFound = true;
+            }
+        }
+        catch(e){
+        }
 
+        return isFound;
+    }
 
 }
