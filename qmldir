@@ -1,1 +1,4 @@
 module MetaLibCore
+
+
+KeyValueStore               1.0 KeyValueStore.qml
