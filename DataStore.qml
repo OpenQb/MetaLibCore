@@ -64,6 +64,25 @@ QbSql{
         return {};
     }
 
+    function getInfo(did){
+        var vmap = objDataStore.preparedQuery(
+                    "SELECT did,mid,path,utimestamp,ctimestamp FROM DataStore WHERE did=:did",
+                    [
+                        {"name":":did","data":did,"type":"integer"}
+                    ]
+                    );
+        try{
+            if(vmap["status"] === "OK"){
+                if(vmap["data"][0] === undefined) return {};
+                return vmap["data"][0];
+            }
+        }
+        catch(e){
+        }
+
+        return {};
+    }
+
     function update(did,mid,path,data){
         var vmap = objDataStore.preparedQuery(
                     "UPDATE DataStore SET utimestamp=(strftime('%s', 'now')), mid=:mid, path=:path, data=:data WHERE did=:did",

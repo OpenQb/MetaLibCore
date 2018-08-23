@@ -18,6 +18,7 @@ Item {
 
     property int itemViewStyle: 0; // #0 - listView; #1 - gridView
     property int alternateColorForRow: 0; // #0 - No; #1 - Yes
+    property int databaseStructure: 0;// #0 - Move data to database folder #1 - Copy data to database #2 - Keep data where it is
 
 
     property int currentPageNum: 0;
@@ -112,6 +113,7 @@ Item {
         settings["gridSizeStyle"] = objMetaDbModel.gridSizeStyle;
         settings["itemViewStyle"] = objMetaDbModel.itemViewStyle;
         settings["alternateColorForRow"] = objMetaDbModel.alternateColorForRow;
+        settings["databaseStructure"] = objMetaDbModel.databaseStructure;
         objKVS.forcedSet("metaDbSettings", JSON.stringify(settings));
     }
 
@@ -126,6 +128,7 @@ Item {
             objMetaDbModel.gridSizeStyle = settings["gridSizeStyle"];
             objMetaDbModel.itemViewStyle = settings["itemViewStyle"];
             objMetaDbModel.alternateColorForRow = settings["alternateColorForRow"];
+            objMetaDbModel.databaseStructure = settings["databaseStructure"];
         }
         catch(e){
         }
