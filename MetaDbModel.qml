@@ -6,8 +6,29 @@ Item {
     property string dbPath;
     property bool isReady:false;
 
+    property alias model: objMainModel
+
+    property int itemPerPage: 100;
+    property int itemHeight: 50; // used when in listView
+
+    property int thumbnailWidth: 100; // used when in gridView
+    property int thumbnailHeight: 100; // used when in gridView
+    property int maxGridPerRow: 5 // used when in gridView
+    property int gridSizeStyle: 0 // #0 - adaptive grid, #1 - fixed grid
+                                  // used when in gridView
+
+    property int itemViewStyle: 0 // #0 - listView; #1 - gridView
+
+
+    property int currentPageNum: 0
+    property int totalPage: 0
+
     signal error(string errorText);
 
+
+    ListModel{
+        id: objMainModel
+    }
 
     MetaStore{
         id: objMS
@@ -57,4 +78,25 @@ Item {
 
         objMetaDbModel.isReady = true;
     }
+
+
+    // ## All Important Methods ## //
+    function reload(){
+    }
+
+    function nextPage(){
+    }
+    function hasNextPage(){
+    }
+
+    function previousPage(){
+    }
+    function hasPreviousPage(){
+    }
+
+
+    function gotoPage(num){
+    }
+
+
 }
