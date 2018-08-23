@@ -38,13 +38,11 @@ QbSql {
 
     function isKeyExists(key){
         var vmap = objKeyValueStore.preparedQuery("SELECT COUNT(*) FROM KeyValueStore WHERE key=:key",[[":key",key]]);
-
-        console.log(JSON.stringify(vmap));
-
+        //console.log(JSON.stringify(vmap));
         var isFound = false;
         try{
             if(vmap["status"] === "OK"){
-
+                if(vmap["data"][0]["COUNT(*)"] === 1) isFound = true;
             }
         }
         catch(e){
