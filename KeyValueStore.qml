@@ -50,6 +50,21 @@ QbSql {
         else return dval;
     }
 
+    function update(key,value){
+        if(key === undefined || key === null || key==="") return false;
+        if(value === undefined || value === null) value = "";
+        var vmap = objKeyValueStore.preparedQuery("UPDATE KeyValueStore SET value=:value WHERE key=:key",[[":key",key],[":value",value]]);
+        var isOK = false;
+        try{
+            if(vmap["status"] === "OK"){
+                isOK = true;
+            }
+        }
+        catch(e){
+        }
+        return isOK;
+    }
+
     function isKeyExists(key){
         var vmap = objKeyValueStore.preparedQuery("SELECT COUNT(*) FROM KeyValueStore WHERE key=:key",[[":key",key]]);
         //console.log(JSON.stringify(vmap));
