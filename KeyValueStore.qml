@@ -18,6 +18,15 @@ QbSql {
         return isOK;
     }
 
+    function forcedSet(key,value){
+        if(isKeyExists(key)){
+            return update(key,value);
+        }
+        else{
+            return set(key,value);
+        }
+    }
+
     function set(key,value){
         if(key === undefined || key === null || key==="") return false;
         if(value === undefined || value === null) value = "";
