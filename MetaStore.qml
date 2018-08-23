@@ -6,13 +6,13 @@ QbSql{
 
     function setup(){
         var vmap = objMetaStore.query("CREATE TABLE IF NOT EXISTS MetaStore("
-                                          +" mid INTEGER PRIMARY KEY AUTOINCREMENT,"
-                                          +" title VARCHAR(250) NOT NULL DEFAULT '',"
-                                          +" tags VARCHAR(1024) NOT NULL DEFAULT '',"
-                                          +" author VARCHAR(100) NOT NULL DEFAULT '',"
-                                          +" utimestamp INT NOT NULL DEFAULT(strftime('%s', 'now')),"
-                                          +" ctimestamp INT NOT NULL DEFAULT(strftime('%s', 'now'))"
-                                          +")");
+                                      +" mid INTEGER PRIMARY KEY AUTOINCREMENT,"
+                                      +" title VARCHAR(250) NOT NULL DEFAULT '',"
+                                      +" tags VARCHAR(1024) NOT NULL DEFAULT '',"
+                                      +" author VARCHAR(100) NOT NULL DEFAULT '',"
+                                      +" utimestamp INT NOT NULL DEFAULT(strftime('%s', 'now')),"
+                                      +" ctimestamp INT NOT NULL DEFAULT(strftime('%s', 'now'))"
+                                      +")");
         var isOK = false;
         try{
             if(vmap["status"] === "OK"){
@@ -41,8 +41,15 @@ QbSql{
     }
 
     function update(mid,title,tags,author){
-        var vmap = objMetaStore.preparedQuery("UPDATE MetaStore SET title=:title, tags=:tags, author=:author WHERE mid=:mid",
-                    [[":title",title],[":tags",tags],[":author",author],[":mid",mid]]);
+        var vmap = objMetaStore.preparedQuery(
+                    "UPDATE MetaStore SET title=:title, tags=:tags, author=:author WHERE mid=:mid",
+                    [
+                        {"name":":mid","data":mid,"type":"integer"},
+                        {"name":":title","data":title,"type":"string"},
+                        {"name":":tags","data":tags,"type":"string"},
+                        {"name":":author","data":author,"type":"string"}
+                    ]
+                    );
         console.log(JSON.stringify(vmap));
         var isOK = false;
         try{
