@@ -13,15 +13,14 @@ Item {
 
     property int thumbnailWidth: 100; // used when in gridView
     property int thumbnailHeight: 100; // used when in gridView
-    property int maxGridPerRow: 5 // used when in gridView
-    property int gridSizeStyle: 0 // #0 - adaptive grid, #1 - fixed grid
-                                  // used when in gridView
+    property int maxGridPerRow: 5; // used when in gridView
+    property int gridSizeStyle: 0; // #0 - adaptive grid, #1 - fixed grid // used when in gridView
 
-    property int itemViewStyle: 0 // #0 - listView; #1 - gridView
+    property int itemViewStyle: 0; // #0 - listView; #1 - gridView
 
 
-    property int currentPageNum: 0
-    property int totalPage: 0
+    property int currentPageNum: 0;
+    property int totalPage: 0;
 
     signal error(string errorText);
 
@@ -43,7 +42,9 @@ Item {
         id: objKVS
     }
 
-    Component.onCompleted: {
+    function setup(){
+        objMetaDbModel.isReady = false;
+
         if(objMetaDbModel.dbPath === "" || objMetaDbModel.dbPath===null || objMetaDbModel.dbPath===undefined) return;
 
         // database setup
@@ -78,7 +79,6 @@ Item {
 
         objMetaDbModel.isReady = true;
     }
-
 
     // ## All Important Methods ## //
     function reload(){
