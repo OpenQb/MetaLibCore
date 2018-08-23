@@ -10,8 +10,8 @@ QbSql{
                                           +" title VARCHAR(250) NOT NULL DEFAULT '',"
                                           +" tags VARCHAR(1024) NOT NULL DEFAULT '',"
                                           +" author VARCHAR(100) NOT NULL DEFAULT '',"
-                                          +" udate INT NOT NULL DEFAULT(strftime('%s', 'now')),"
-                                          +" cdate INT NOT NULL DEFAULT(strftime('%s', 'now'))"
+                                          +" utimestamp INT NOT NULL DEFAULT(strftime('%s', 'now')),"
+                                          +" ctimestamp INT NOT NULL DEFAULT(strftime('%s', 'now'))"
                                           +")");
         var isOK = false;
         try{
@@ -43,7 +43,7 @@ QbSql{
     function update(mid,title,tags,author){
         var vmap = objMetaStore.preparedQuery(
                     "UPDATE MetaStore SET title=:title,tags=:tags,author=:author WHERE mid=:mid)",
-                    [[":title",title],[":tags",tags],[":author",author],[":mid",mid]]);
+                    [[":mid",mid],[":title",title],[":tags",tags],[":author",author]]);
         console.log(JSON.stringify(vmap));
         var isOK = false;
         try{
