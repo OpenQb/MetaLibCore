@@ -25,6 +25,8 @@ Item {
 
     signal error(string errorText);
 
+    property string currentQuery:"";
+
 
     ListModel{
         id: objMainModel
@@ -130,6 +132,7 @@ Item {
     }
 
     function reload(){
+        doQuery();
     }
 
     function nextPage(){
@@ -144,6 +147,22 @@ Item {
 
 
     function gotoPage(num){
+    }
+
+    function all(){
+
+
+        doQuery();
+    }
+
+    function search(keyword,field){
+
+        doQuery();
+    }
+
+
+    function doQuery(){
+
     }
 
 
