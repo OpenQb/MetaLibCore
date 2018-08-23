@@ -40,6 +40,24 @@ QbSql{
         return isOK;
     }
 
+    function get(mid){
+        var vmap = objMetaStore.preparedQuery(
+                    "SELECT * FROM MetaStore WHERE mid=:mid",
+                    [
+                        {"name":":mid","data":mid,"type":"integer"}
+                    ]
+                    );
+        try{
+            if(vmap["status"] === "OK"){
+                return vmap["data"][0];
+            }
+        }
+        catch(e){
+        }
+
+        return {};
+    }
+
     function update(mid,title,tags,author){
         var vmap = objMetaStore.preparedQuery(
                     "UPDATE MetaStore SET utimestamp=(strftime('%s', 'now')), title=:title, tags=:tags, author=:author WHERE mid=:mid",
